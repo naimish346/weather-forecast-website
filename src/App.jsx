@@ -9,7 +9,7 @@ import React from 'react';
 
 import { ToastContainer, toast } from 'react-toastify';
 
-function capatalizeFirstLetter (string) {
+function capitalizeFirstLetter (string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -21,7 +21,7 @@ const App = () => {
 
   const getWeather = async () => {
     const cityName = query.q ? query.q : 'current location';
-    toast.info(`Fetching weather data for ${capatalizeFirstLetter(cityName)}`);
+    toast.info(`Fetching weather data for ${capitalizeFirstLetter(cityName)}`);
     await getFormattedWeatherData({ ...query, units}).then((data) => {
       toast.success(`Fetch weather data for ${data.name}, ${data.country}`)
       setWeather(data);
