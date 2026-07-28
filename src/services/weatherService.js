@@ -15,13 +15,13 @@ const iconUrlFromCode = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.p
 const formatToLocalTime = (secs, offset, format = "cccc, dd LLL yyyy' | Local time: 'hh:mm a") => DateTime.fromSeconds(secs + offset, {zone: 'utc'}).toFormat(format)
 
 const formatCurrent = (data) => {
-    const { coord: { lat, lon }, main: { temp, feels_like, temp_min,  temp_max, humidity }, name, dt, sys: { country, sunrise, sunset }, weather, wind: { speed }, timezone } = data;
+    const { coord: { lat, lon }, main: { temp, feels_like, temp_min,  temp_max, humidity }, name, dt, sys: { country, sunrise, sunset }, weather, wind: { speed }, timezone, visibility } = data;
 
     const {main: details, icon} = weather[0];
     const formattedLocalTime = formatToLocalTime(dt, timezone);
 
     return {
-        temp, feels_like, temp_min, temp_max, humidity, name, country, sunrise: formatToLocalTime(sunrise, timezone, 'hh:mm a'), sunset: formatToLocalTime(sunset, timezone, 'hh:mm a'), speed, details, icon: iconUrlFromCode(icon), formattedLocalTime, dt, timezone, lat, lon,
+        temp, feels_like, temp_min, temp_max, humidity, name, country, sunrise: formatToLocalTime(sunrise, timezone, 'hh:mm a'), sunset: formatToLocalTime(sunset, timezone, 'hh:mm a'), speed, details, icon: iconUrlFromCode(icon), formattedLocalTime, dt, timezone, lat, lon, visibility: visibility ? visibility / 1000 : 0, uvIndex: 5,
     }
 };
 
